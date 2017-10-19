@@ -179,12 +179,18 @@ public class AddDeleteActivity extends AppCompatActivity {
         job.setAdapter(adapter);
         job.setThreshold(1);
 
-        /*AutoCompleteTextView job = (AutoCompleteTextView)findViewById(R.id.job);
-        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,metiers);
-        job.setAdapter(adapter);
-        job.setThreshold(1);*/
+        List<String> categories = new ArrayList<String>();
+        categories.add("Cardiologie");
+        categories.add("Radiologie");
+        categories.add("Pediatrie");
+        categories.add("Chirurgie");
 
         Spinner serviceH = (Spinner) findViewById(R.id.serviceH);
+        ArrayAdapter adapter1 = new ArrayAdapter(this,android.R.layout.simple_list_item_1,categories);
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        serviceH.setAdapter(adapter1);
+
+       /* Spinner serviceH = (Spinner) findViewById(R.id.serviceH);
         serviceH.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -195,17 +201,13 @@ public class AddDeleteActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
 
-        List<String> categories = new ArrayList<String>();
-        categories.add("Cardiologie");
-        categories.add("Radiologie");
-        categories.add("Pediatrie");
-        categories.add("Chirurgie");
 
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
+
+        /*ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        serviceH.setAdapter(dataAdapter);
+        serviceH.setAdapter(dataAdapter);*/
 
 
         EditText mail_text = (EditText)findViewById(R.id.mail_text);
