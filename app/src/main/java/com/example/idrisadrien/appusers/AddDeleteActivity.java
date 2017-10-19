@@ -201,6 +201,7 @@ public class AddDeleteActivity extends AppCompatActivity {
         categories.add("Cardiologie");
         categories.add("Radiologie");
         categories.add("Pediatrie");
+        categories.add("Chirurgie");
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
