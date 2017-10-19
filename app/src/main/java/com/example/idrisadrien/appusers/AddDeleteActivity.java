@@ -9,7 +9,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -23,6 +25,9 @@ import java.util.List;
  */
 
 public class AddDeleteActivity extends AppCompatActivity {
+
+    String[] metiers={"Cardiologue","Radiologue","Infirmier(e)","Urgentiste"};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -45,22 +50,18 @@ public class AddDeleteActivity extends AppCompatActivity {
 
             EditText nom_text = (EditText)findViewById(R.id.nom_text);
             EditText prenom_text = (EditText)findViewById(R.id.prenom_text);
-            RadioButton sexe_button = (RadioButton)findViewById(R.id.sexe_button);
+
+            RadioGroup sexe_button = (RadioGroup) findViewById(R.id.sexe_button);
+            RadioButton gender_checked = (RadioButton)findViewById(sexe_button.getCheckedRadioButtonId());
+            String genderVal = gender_checked.getText().toString();
 
 
             AutoCompleteTextView job = (AutoCompleteTextView)findViewById(R.id.job);
-            Spinner serviceH = (Spinner)findViewById(R.id.serviceH);
+            ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,metiers);
+            job.setAdapter(adapter);
+            job.setThreshold(1);
 
-            serviceH.setOnItemClickListener((AdapterView.OnItemClickListener) this);
-            List<String> categories = new ArrayList<String>();
-            categories.add("Cardiologie");
-            categories.add("Radiologie");
-            categories.add("Pediatrie");
 
-            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
-
-            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            serviceH.setAdapter(dataAdapter);
 
 
             EditText mail_text = (EditText)findViewById(R.id.mail_text);
@@ -69,7 +70,7 @@ public class AddDeleteActivity extends AppCompatActivity {
 
             String nom = intentDelete.getStringExtra("nom");
             String prenom= intentDelete.getStringExtra("prenom");
-            String sexe = intentDelete.getStringExtra(" ");
+            String sexe = intentDelete.getStringExtra("sexe");
             String metier = intentDelete.getStringExtra("metier");
             String service = intentDelete.getStringExtra("service");
             String mail = intentDelete.getStringExtra("mail");
@@ -78,9 +79,9 @@ public class AddDeleteActivity extends AppCompatActivity {
 
             nom_text.setText(nom);
             prenom_text.setText(prenom);
-            sexe_button.setText(sexe);
+            gender_checked.setText(genderVal);
             job.setText(metier);
-            serviceH.setText(service);
+            //serviceText.setText();
             mail_text.setText(mail);
             tel_text.setText(tel);
             resume_text.setText(resume);
@@ -103,9 +104,38 @@ public class AddDeleteActivity extends AppCompatActivity {
         Log.d("MyLog","Clicked on add");
         EditText nom_text = (EditText)findViewById(R.id.nom_text);
         EditText prenom_text = (EditText)findViewById(R.id.prenom_text);
-        RadioButton sexe_button = (RadioButton)findViewById(R.id.sexe_button);
+
+        RadioGroup sexe_button = (RadioGroup) findViewById(R.id.sexe_button);
+        RadioButton gender_checked = (RadioButton)findViewById(sexe_button.getCheckedRadioButtonId());
+        //String genderVal = gender_checked.getText().toString();
+
         AutoCompleteTextView job = (AutoCompleteTextView)findViewById(R.id.job);
-        Spinner serviceH = (Spinner)findViewById(R.id.serviceH);
+        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,metiers);
+        job.setAdapter(adapter);
+        job.setThreshold(1);
+
+        Spinner serviceH = (Spinner) findViewById(R.id.serviceH);
+        serviceH.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    String serviceText = parent.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        List<String> categories = new ArrayList<String>();
+        categories.add("Cardiologie");
+        categories.add("Radiologie");
+        categories.add("Pediatrie");
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        serviceH.setAdapter(dataAdapter);
+
+
         EditText mail_text = (EditText)findViewById(R.id.mail_text);
         EditText tel_text = (EditText)findViewById(R.id.tel_text);
         EditText resume_text = (EditText)findViewById(R.id.resume_text);
@@ -115,9 +145,9 @@ public class AddDeleteActivity extends AppCompatActivity {
         intent.putExtra("add",true);
         intent.putExtra("nom",nom_text.getText().toString());
         intent.putExtra("prenom",prenom_text.getText().toString());
-        intent.putExtra("sexe",sexe_button.getText().toString());
+        intent.putExtra("sexe",gender_checked.getText().toString());
         intent.putExtra("metier",job.getText().toString());
-        intent.putExtra("service",serviceH.getText().toString());
+        intent.putExtra("service",serviceH.getSelectedItem().toString());
         intent.putExtra("mail",mail_text.getText().toString());
         intent.putExtra("tel", tel_text.getText().toString());
         intent.putExtra("resume",resume_text.getText().toString());
@@ -139,9 +169,44 @@ public class AddDeleteActivity extends AppCompatActivity {
         Log.d("MyLog","Clicked on modify");
         EditText nom_text = (EditText)findViewById(R.id.nom_text);
         EditText prenom_text = (EditText)findViewById(R.id.prenom_text);
-        RadioButton sexe_button = (RadioButton)findViewById(R.id.sexe_button);
+
+        RadioGroup sexe_button = (RadioGroup) findViewById(R.id.sexe_button);
+        RadioButton gender_checked = (RadioButton)findViewById(sexe_button.getCheckedRadioButtonId());
+        String genderVal = gender_checked.getText().toString();
+
         AutoCompleteTextView job = (AutoCompleteTextView)findViewById(R.id.job);
-        Spinner serviceH = (Spinner)findViewById(R.id.serviceH);
+        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,metiers);
+        job.setAdapter(adapter);
+        job.setThreshold(1);
+
+        /*AutoCompleteTextView job = (AutoCompleteTextView)findViewById(R.id.job);
+        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,metiers);
+        job.setAdapter(adapter);
+        job.setThreshold(1);*/
+
+        Spinner serviceH = (Spinner) findViewById(R.id.serviceH);
+        serviceH.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String serviceText = parent.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        List<String> categories = new ArrayList<String>();
+        categories.add("Cardiologie");
+        categories.add("Radiologie");
+        categories.add("Pediatrie");
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        serviceH.setAdapter(dataAdapter);
+
+
         EditText mail_text = (EditText)findViewById(R.id.mail_text);
         EditText tel_text = (EditText)findViewById(R.id.tel_text);
         EditText resume_text = (EditText)findViewById(R.id.resume_text);
@@ -152,9 +217,9 @@ public class AddDeleteActivity extends AppCompatActivity {
         intentToSend.putExtra("modify",true);
         intentToSend.putExtra("nom",nom_text.getText().toString());
         intentToSend.putExtra("prenom",prenom_text.getText().toString());
-        intentToSend.putExtra("sexe",sexe_button.getText().toString());
+        intentToSend.putExtra("sexe",gender_checked.getText().toString());
         intentToSend.putExtra("metier",job.getText().toString());
-        intentToSend.putExtra("service",serviceH.getText().toString());
+        intentToSend.putExtra("service",serviceH.getSelectedItem().toString());
         intentToSend.putExtra("mail",mail_text.getText().toString());
         intentToSend.putExtra("tel", tel_text.getText().toString());
         intentToSend.putExtra("resume",resume_text.getText().toString());

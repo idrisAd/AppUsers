@@ -36,13 +36,13 @@ public class ListUsersActivity extends AppCompatActivity{
             Log.d("MyLog","Adding someone");
             String nom = intentAddOrDelete.getStringExtra("nom");
             String prenom= intentAddOrDelete.getStringExtra("prenom");
-            String sexe = intentAddOrDelete.getStringExtra(" ");
+            String sexe = intentAddOrDelete.getStringExtra("sexe");
             String metier = intentAddOrDelete.getStringExtra("metier");
             String service = intentAddOrDelete.getStringExtra("service");
             String mail = intentAddOrDelete.getStringExtra("mail");
             String tel = intentAddOrDelete.getStringExtra("tel");
             String resume = intentAddOrDelete.getStringExtra("resume");
-            this.userDAO.create(new User((Integer) null, nom, prenom, sexe, metier, service, mail, tel, resume));
+            this.userDAO.create(new User(null, nom, prenom, sexe, metier, service, mail, tel, resume));
         }
         if(deleteIntent){
             Log.d("MyLog","Deleting someone");
@@ -54,7 +54,7 @@ public class ListUsersActivity extends AppCompatActivity{
             Integer id = intentAddOrDelete.getIntExtra("id",-1);
             String nom = intentAddOrDelete.getStringExtra("nom");
             String prenom= intentAddOrDelete.getStringExtra("prenom");
-            String sexe = intentAddOrDelete.getStringExtra(" ");
+            String sexe = intentAddOrDelete.getStringExtra("sexe");
             String metier = intentAddOrDelete.getStringExtra("metier");
             String service = intentAddOrDelete.getStringExtra("service");
             String mail = intentAddOrDelete.getStringExtra("mail");
@@ -78,16 +78,16 @@ public class ListUsersActivity extends AppCompatActivity{
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 User item = adapter.getItem(position);
                 Log.d("MyLog","Clicked on someone : " + item.toString());
-                Intent intent = new Intent(ListUsersActivity.this, AddDeleteActivity.class);
-                intent.putExtra("id",item.getId().toString());
-                intent.putExtra("nom",item.getId().toString());
-                intent.putExtra("prenom",item.getId().toString());
-                intent.putExtra("sexe",item.getId().toString());
-                intent.putExtra("metier",item.getId().toString());
-                intent.putExtra("service",item.getId().toString());
-                intent.putExtra("mail",item.getId().toString());
-                intent.putExtra("tel", item.getId().toString());
-                intent.putExtra("resume",item.getId().toString());
+                Intent intent = new Intent(ListUsersActivity.this,AddDeleteActivity.class);
+                intent.putExtra("id",item.getId());
+                intent.putExtra("nom",item.getNom());
+                intent.putExtra("prenom",item.getPrenom());
+                intent.putExtra("sexe",item.getSexe());
+                intent.putExtra("metier",item.getMetier());
+                intent.putExtra("service",item.getService());
+                intent.putExtra("mail",item.getMail());
+                intent.putExtra("tel", item.getTel());
+                intent.putExtra("resume",item.getResume());
                 startActivity(intent);
             }
         });

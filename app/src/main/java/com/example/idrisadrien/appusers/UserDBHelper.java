@@ -22,7 +22,7 @@ public class UserDBHelper extends SQLiteOpenHelper {
                 +"id Integer PRIMARY KEY AUTOINCREMENT,"
                 +"nom Text NOT NULL,"
                 +"prenom Text NOT NULL,"
-                +"sexe Text NOT NULL,"
+                +"sexe Text,"
                 +"metier Text NOT NULL,"
                 +"service Text NOT NULL,"
                 +"mail Text NOT NULL,"
