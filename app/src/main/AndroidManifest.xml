@@ -12,8 +12,8 @@
         <activity android:name=".ListUsersActivity"
             android:screenOrientation="portrait">
 
-            <!--android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">-->
+            <!--android_logo:label="@string/app_name"
+            android_logo:theme="@style/AppTheme.NoActionBar">-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -25,7 +25,7 @@
                   android:screenOrientation="portrait"
                   android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.SPLASHACTIVITY"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
