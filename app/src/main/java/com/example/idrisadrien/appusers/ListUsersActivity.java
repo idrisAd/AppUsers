@@ -3,12 +3,21 @@ package com.example.idrisadrien.appusers;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.BoolRes;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.List;
@@ -22,10 +31,24 @@ public class ListUsersActivity extends AppCompatActivity{
     private UserDataSource userDataSource = new UserDataSource(this);
     private UserDAO userDAO = userDataSource.newUserDAO();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_users);
+
+        Button help_button = (Button)findViewById(R.id.aide);
+        help_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Log.d("MyLog","Clicked on help button");
+                Intent intent = new Intent(ListUsersActivity.this, WebviewActivity.class);
+                intent.putExtra("id",-1);
+                startActivity(intent);
+            }
+        });
+
+
         Intent intentAddOrDelete = getIntent();
 
         Boolean addIntent = intentAddOrDelete.getBooleanExtra("add",false);
@@ -100,5 +123,7 @@ public class ListUsersActivity extends AppCompatActivity{
             startActivity(intent);
 
     }
+
+
 
 }

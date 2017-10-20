@@ -6,6 +6,8 @@ package com.example.idrisadrien.appusers;
 
 public class User {
 
+    /* Classe introduisant un User */
+
     private Integer id;
     private String nom;
     private String prenom;
@@ -98,6 +100,12 @@ public class User {
 
     public void setResume(String resume) {
         this.resume = resume;
+    }
+
+
+    // On affiche le nom et le prenom de l'utilisateur dans la liste
+    public String toString(){
+        return this.nom + " " + this.prenom;
     }
 
 

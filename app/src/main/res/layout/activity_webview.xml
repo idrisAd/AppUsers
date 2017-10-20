@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:weightSum="1">
+
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="259dp"
+        android:layout_weight="0.97"/>
+
+    <Button
+        android:id="@+id/retour"
+        android:layout_width="202dp"
+        android:layout_height="68dp"
+        android:layout_gravity="bottom|center"
+        android:text="Retour"/>
+
+</LinearLayout>
