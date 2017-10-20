@@ -50,10 +50,14 @@ public class AddDeleteActivity extends AppCompatActivity {
             TextView add_button = (TextView) findViewById(R.id.add_button);
             TextView delete_button = (TextView) findViewById(R.id.delete_button);
             TextView modify_button = (TextView)findViewById(R.id.modify_button);
+            TextView sendMail_button = (TextView)findViewById(R.id.sendMail);
+            TextView call_button = (TextView) findViewById(R.id.callButton);
 
             add_button.setVisibility(View.GONE);
             delete_button.setVisibility(View.VISIBLE);
             modify_button.setVisibility(View.VISIBLE);
+            sendMail_button.setVisibility(View.VISIBLE);
+            call_button.setVisibility(View.VISIBLE);
 
 
             // Editing the form to add a user
@@ -97,8 +101,8 @@ public class AddDeleteActivity extends AppCompatActivity {
                 }
             });
 
-            Button call = (Button)findViewById(R.id.call);
-            sendMail.setOnClickListener(new View.OnClickListener() {
+            Button call = (Button)findViewById(R.id.callButton);
+            call.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Log.d("MyLog","Click on Call");
@@ -130,19 +134,21 @@ public class AddDeleteActivity extends AppCompatActivity {
             resume_text.setText(resume);
 
 
-
-
-
             // Interface to add user
         } else {
             Log.d("MyLog","Interface to add user");
             TextView add_button = (TextView)findViewById(R.id.add_button);
             TextView delete_button = (TextView)findViewById(R.id.delete_button);
             TextView modify_button = (TextView)findViewById(R.id.modify_button);
+            TextView sendMail_button = (TextView)findViewById(R.id.sendMail);
+            TextView call_button = (TextView) findViewById(R.id.callButton);
 
             add_button.setVisibility(View.VISIBLE);
             delete_button.setVisibility(View.GONE);
             modify_button.setVisibility(View.GONE);
+            sendMail_button.setVisibility(View.GONE);
+            call_button.setVisibility(View.GONE);
+
         }
 
     }

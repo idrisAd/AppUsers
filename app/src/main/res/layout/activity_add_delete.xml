@@ -32,26 +32,21 @@
     <RadioGroup
         android:id="@+id/sexe_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
 
         <RadioButton
             android:id="@+id/radioMale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Masculin"
-            android:checked="true"/>
+            android:checked="true"
+            android:text="Masculin"/>
 
         <RadioButton
             android:id="@+id/radioFemale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Feminin"/>
-
-        <RadioButton
-            android:id="@+id/radioOther"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Autre"/>
 
     </RadioGroup>
 
@@ -110,7 +105,7 @@
     <Button
         android:id="@+id/add_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:onClick="clickOnAdd"
         android:text="Add"
         android:visibility="visible"/>
@@ -131,21 +126,27 @@
         android:onClick="clickOnModify"
         android:text="Modify"/>
 
-    <Button
-        android:id="@+id/sendMail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Send mail"
-        android:visibility="visible"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/call"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Call"
-        android:visibility="visible"/>
+        <Button
+            android:id="@+id/callButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center"
+            android:text="Call"
+            android:visibility="visible"/>
 
-
+        <Button
+            android:id="@+id/sendMail"
+            android:layout_width="wrap_content"
+            android:layout_height="37dp"
+            android:layout_gravity="right|center"
+            android:text="Send mail"
+            android:visibility="visible"/>
+    </LinearLayout>
 
 
 </LinearLayout>

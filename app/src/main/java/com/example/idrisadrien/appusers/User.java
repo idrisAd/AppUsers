@@ -39,7 +39,7 @@ public class User {
     }
 
     public String getNom() {
-        return nom;
+        return nom.toUpperCase();
     }
 
     public void setNom(String nom) {
