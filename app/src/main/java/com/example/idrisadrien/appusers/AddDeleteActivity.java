@@ -1,7 +1,11 @@
 package com.example.idrisadrien.appusers;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -155,13 +159,42 @@ public class AddDeleteActivity extends AppCompatActivity {
     }
 
     protected void clickOnDelete(View view){
+
+        // Verification for the delete
+        AlertDialog.Builder builder;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
+        } else {
+            builder = new AlertDialog.Builder(this);
+        }
         Log.d("MyLog","Clicked on delete");
-        Intent intentReceived = getIntent();
-        Integer idUserToDelete = intentReceived.getIntExtra("id", -1);
-        Intent intentToSend = new Intent(AddDeleteActivity.this, ListUsersActivity.class);
-        intentToSend.putExtra("delete",true);
-        intentToSend.putExtra("id",idUserToDelete);
-        startActivity(intentToSend);
+        builder.setTitle("Delete entry")
+                .setMessage("Are you sure you want to delete this entry?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // continue with delete
+
+                        Intent intentReceived = getIntent();
+                        Integer idUserToDelete = intentReceived.getIntExtra("id", -1);
+                        Intent intentToSend = new Intent(AddDeleteActivity.this, ListUsersActivity.class);
+                        intentToSend.putExtra("delete",true);
+                        intentToSend.putExtra("id",idUserToDelete);
+                        startActivity(intentToSend);
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+        Log.d("MyLog","DialogBox appear");
+
+
+
+
     }
 
     protected void clickOnModify(View view){
