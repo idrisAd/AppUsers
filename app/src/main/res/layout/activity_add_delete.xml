@@ -131,6 +131,21 @@
         android:onClick="clickOnModify"
         android:text="Modify"/>
 
+    <Button
+        android:id="@+id/sendMail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send mail"
+        android:visibility="visible"/>
+
+    <Button
+        android:id="@+id/call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Call"
+        android:visibility="visible"/>
+
+
 
 
 </LinearLayout>

@@ -3,6 +3,7 @@ package com.example.idrisadrien.appusers;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -31,8 +33,8 @@ import java.util.List;
 public class AddDeleteActivity extends AppCompatActivity {
 
     String[] metiers={"Cardiologue","Radiologue","Infirmier(e)","Urgentiste"};
-
-
+    private String adMail;
+    private String numero;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -43,7 +45,7 @@ public class AddDeleteActivity extends AppCompatActivity {
         Integer printUser = intentDelete.getIntExtra("id", -1);
 
         if(printUser!=-1){
-            Log.d("MyLog", "Print clocked user, and delete/modify buttons");
+            Log.d("MyLog", "Print clocked user, delete/modify buttons, mail/call buttons");
 
             TextView add_button = (TextView) findViewById(R.id.add_button);
             TextView delete_button = (TextView) findViewById(R.id.delete_button);
@@ -53,35 +55,61 @@ public class AddDeleteActivity extends AppCompatActivity {
             delete_button.setVisibility(View.VISIBLE);
             modify_button.setVisibility(View.VISIBLE);
 
+
             // Editing the form to add a user
             EditText nom_text = (EditText)findViewById(R.id.nom_text);
             EditText prenom_text = (EditText)findViewById(R.id.prenom_text);
-
             RadioGroup sexe_button = (RadioGroup) findViewById(R.id.sexe_button);
             RadioButton gender_checked = (RadioButton)findViewById(sexe_button.getCheckedRadioButtonId());
             String genderVal = gender_checked.getText().toString();
-
-
+            // Auto Complete Text
             AutoCompleteTextView job = (AutoCompleteTextView)findViewById(R.id.job);
             ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,metiers);
             job.setAdapter(adapter);
             job.setThreshold(1);
-
+            // Spinner
             List<String> categories = new ArrayList<String>();
             categories.add("Cardiologie");
             categories.add("Radiologie");
             categories.add("Pediatrie");
             categories.add("Chirurgie");
-
             Spinner serviceH = (Spinner) findViewById(R.id.serviceH);
             ArrayAdapter adapter1 = new ArrayAdapter(this,android.R.layout.simple_list_item_1,categories);
             adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             serviceH.setAdapter(adapter1);
 
-
-            EditText mail_text = (EditText)findViewById(R.id.mail_text);
-            EditText tel_text = (EditText)findViewById(R.id.tel_text);
+            final EditText mail_text = (EditText)findViewById(R.id.mail_text);
+            final EditText tel_text = (EditText)findViewById(R.id.tel_text);
             EditText resume_text = (EditText)findViewById(R.id.resume_text);
+
+
+            Button sendMail = (Button)findViewById(R.id.sendMail);
+            sendMail.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d("MyLog","Click on Send Mail");
+                    adMail = mail_text.getText().toString();
+
+                    Uri uri = Uri.parse("mailto:" + adMail);
+                    Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
+                    intent.putExtra("mail body",-1);
+                    startActivity(intent);
+                }
+            });
+
+            Button call = (Button)findViewById(R.id.call);
+            sendMail.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d("MyLog","Click on Call");
+                    numero = tel_text.getText().toString();
+
+                    Uri telephone = Uri.parse("tel:" + numero);
+                    Intent call_intent = new Intent(Intent.ACTION_DIAL, telephone);
+                    startActivity(call_intent);
+                }
+            });
+
 
             String nom = intentDelete.getStringExtra("nom");
             String prenom= intentDelete.getStringExtra("prenom");
@@ -100,7 +128,12 @@ public class AddDeleteActivity extends AppCompatActivity {
             mail_text.setText(mail);
             tel_text.setText(tel);
             resume_text.setText(resume);
-            // sinon ajout d'un user
+
+
+
+
+
+            // Interface to add user
         } else {
             Log.d("MyLog","Interface to add user");
             TextView add_button = (TextView)findViewById(R.id.add_button);
@@ -160,7 +193,7 @@ public class AddDeleteActivity extends AppCompatActivity {
 
     protected void clickOnDelete(View view){
 
-        // Verification for the delete
+        // Verification delete
         AlertDialog.Builder builder;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -247,5 +280,7 @@ public class AddDeleteActivity extends AppCompatActivity {
 
 
     }
+
+
 
 }
